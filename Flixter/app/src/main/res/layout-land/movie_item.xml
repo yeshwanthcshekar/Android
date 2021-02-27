@@ -7,24 +7,44 @@
     android:layout_marginBottom="4dp">
 
 
-    <ImageView
-        android:id="@+id/imgMoviePoster"
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_margin="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtMovieTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="fitCenter"
-        />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgVideoPreviewPlayButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_play_circle_outline"
+            android:elevation="1dp"
+            android:translationZ="8dp"
+            android:foregroundGravity="center"/>
+
+        <ImageView
+            android:id="@+id/imgMoviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="2dp"
+            android:scaleType="fitCenter"
+            android:layout_centerInParent="true"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/txtMovieTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        app:layout_constraintStart_toEndOf="@+id/imgMoviePoster"
+        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/txtMovieOverview"
@@ -47,7 +67,7 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgMoviePoster"
+        app:layout_constraintStart_toEndOf="@+id/relativeLayout"
         app:layout_constraintTop_toBottomOf="@+id/txtMovieTitle"
         tools:text="Deputy Sheriff Joe Deke Deacon joins forces with Sgt. Jim Baxter to search for a serial killer who's terrorizing Los Angeles. As they track the culprit, Baxter is unaware that the investigation is dredging up echoes of Deke's past, uncovering disturbing secrets that could threaten more than his case." />
 
