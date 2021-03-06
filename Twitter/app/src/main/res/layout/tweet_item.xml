@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/imgUserImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="6dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.067" />
+
+            <TextView
+                android:id="@+id/txtUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toTopOf="@id/txtTweetBody"
+                app:layout_constraintEnd_toStartOf="@+id/txtScreenName"
+                app:layout_constraintStart_toStartOf="@id/txtTweetBody"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="GoldenStateWarriors" />
+
+            <TextView
+                android:id="@+id/txtScreenName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/txtUserName"
+                app:layout_constraintStart_toEndOf="@+id/txtUserName"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="/@warriors">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtCreatedAt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:padding="2dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/txtScreenName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="9h">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/txtTweetBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:paddingStart="4dp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgUserImage"
+                app:layout_constraintTop_toBottomOf="@id/txtUserName"
+                tools:text="GIF walkthrough of a well-polished version of this assignment (note that the ability to compose tweets will be next week's assignment):" />
+
+            <ImageView
+                android:id="@+id/imgMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/txtTweetBody"
+                app:layout_constraintHorizontal_bias="0.015"
+                app:layout_constraintStart_toEndOf="@id/imgUserImage"
+                app:layout_constraintTop_toBottomOf="@id/txtTweetBody"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
