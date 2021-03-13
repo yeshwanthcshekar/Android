@@ -5,5 +5,9 @@
     <string name="login_label">Log in</string>
     <string name="intent_scheme">oauth</string>
     <string name="intent_host">cprest</string>
+    <string name="quote_tweets">Quote Tweets</string>
+    <string name="retweets">Retweets</string>
+    <string name="likes">Likes</string>
+    <string name="tweet">Tweet</string>
 
 </resources>

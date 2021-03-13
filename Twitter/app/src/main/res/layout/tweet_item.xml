@@ -29,17 +29,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.067" />
+                app:layout_constraintVertical_bias="0.067"
+                app:layout_constraintEnd_toStartOf="@+id/txtTweetBody"/>
+
 
             <TextView
                 android:id="@+id/txtUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="20dp"
+                android:paddingEnd="4dp"
+                android:textAlignment="viewStart"
                 app:layout_constraintBottom_toTopOf="@id/txtTweetBody"
                 app:layout_constraintEnd_toStartOf="@+id/txtScreenName"
-                app:layout_constraintStart_toStartOf="@id/txtTweetBody"
+                app:layout_constraintStart_toEndOf="@id/imgUserImage"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="GoldenStateWarriors" />
 
@@ -48,12 +52,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintBaseline_toBaselineOf="@id/txtUserName"
+                app:layout_constraintEnd_toStartOf="@+id/txtCreatedAt"
                 app:layout_constraintStart_toEndOf="@+id/txtUserName"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="/@warriors">
-
-            </TextView>
+                tools:text="/@warriors" />
 
             <TextView
                 android:id="@+id/txtCreatedAt"
@@ -65,9 +69,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.98"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="9h">
+                app:layout_constraintStart_toEndOf="@+id/txtScreenName"
+                tools:text="9h"/>
 
-            </TextView>
 
             <TextView
                 android:id="@+id/txtTweetBody"
@@ -78,6 +82,7 @@
                 android:linksClickable="true"
                 android:paddingStart="4dp"
                 app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@id/imgMedia"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgUserImage"
                 app:layout_constraintTop_toBottomOf="@id/txtUserName"
@@ -85,16 +90,72 @@
 
             <ImageView
                 android:id="@+id/imgMedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:scaleType="centerInside"
                 app:layout_constraintEnd_toEndOf="@id/txtTweetBody"
                 app:layout_constraintHorizontal_bias="0.015"
-                app:layout_constraintStart_toEndOf="@id/imgUserImage"
+                app:layout_constraintStart_toStartOf="@id/txtTweetBody"
                 app:layout_constraintTop_toBottomOf="@id/txtTweetBody"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintBottom_toTopOf="@+id/LinearLayout"/>
 
+            <LinearLayout
+                android:id="@+id/LinearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/imgMedia"
+                app:layout_constraintStart_toStartOf="@id/txtTweetBody"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_comment"/>
+
+                <TextView
+                    android:id="@+id/txtReplyCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="0"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/retweet"
+                    android:layout_marginStart="45dp"/>
+                <TextView
+                    android:id="@+id/txtRetweetCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_marginStart="4dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite"
+                    android:layout_marginStart="45dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtFavoriteCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_marginStart="4dp"/>
+
+                <ImageView
+                    android:id="@+id/imgShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:src="@drawable/ic_ios_share"/>
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
