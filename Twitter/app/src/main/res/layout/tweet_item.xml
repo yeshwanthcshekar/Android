@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/imgUserImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="6dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.067"
+                app:layout_constraintEnd_toStartOf="@+id/txtTweetBody"/>
+
+
+            <TextView
+                android:id="@+id/txtUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:paddingEnd="4dp"
+                android:textAlignment="viewStart"
+                app:layout_constraintBottom_toTopOf="@id/txtTweetBody"
+                app:layout_constraintEnd_toStartOf="@+id/txtScreenName"
+                app:layout_constraintStart_toEndOf="@id/imgUserImage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="GoldenStateWarriors" />
+
+            <TextView
+                android:id="@+id/txtScreenName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/txtUserName"
+                app:layout_constraintEnd_toStartOf="@+id/txtCreatedAt"
+                app:layout_constraintStart_toEndOf="@+id/txtUserName"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="/@warriors" />
+
+            <TextView
+                android:id="@+id/txtCreatedAt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:padding="2dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/txtScreenName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.98"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtScreenName"
+                tools:text="9h"/>
+
+
+            <TextView
+                android:id="@+id/txtTweetBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:autoLink="all"
+                android:linksClickable="true"
+                android:paddingStart="4dp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@id/imgMedia"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgUserImage"
+                app:layout_constraintTop_toBottomOf="@id/txtUserName"
+                tools:text="GIF walkthrough of a well-polished version of this assignment (note that the ability to compose tweets will be next week's assignment):" />
+
+            <ImageView
+                android:id="@+id/imgMedia"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:layout_constrainedWidth="true"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="@id/txtTweetBody"
+                app:layout_constraintHorizontal_bias="0.015"
+                app:layout_constraintStart_toStartOf="@id/txtTweetBody"
+                app:layout_constraintTop_toBottomOf="@id/txtTweetBody"
+                app:layout_constraintBottom_toTopOf="@+id/LinearLayout"/>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/imgMedia"
+                app:layout_constraintStart_toStartOf="@id/txtTweetBody"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_comment"/>
+
+                <TextView
+                    android:id="@+id/txtReplyCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="0"/>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/retweet"
+                    android:layout_marginStart="45dp"/>
+                <TextView
+                    android:id="@+id/txtRetweetCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_marginStart="4dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_favorite"
+                    android:layout_marginStart="45dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtFavoriteCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:layout_marginStart="4dp"/>
+
+                <ImageView
+                    android:id="@+id/imgShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:src="@drawable/ic_ios_share"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
