@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/states_home"
+        android:title="@string/home"
+        app:showAsAction="always" />
+    <item
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/states_compose"
+        android:title="@string/compose"
+        android:id="@+id/action_compose"
+        />
+
+    <item
+        app:showAsAction="always"
+        android:icon="@drawable/states_profile"
+        android:title="@string/profile"
+        android:id="@+id/action_profile"
+        />
+
+
+
+</menu>
