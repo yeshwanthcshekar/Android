@@ -92,36 +92,26 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /*if(ParseUser.getCurrentUser() != null){
-            gotoMainActivity();
-        }*/
         etUsername = view.findViewById(R.id.username);
         etPassword = view.findViewById(R.id.password);
         btnLogin = view.findViewById(R.id.login);
         btnLogout = view.findViewById(R.id.btnLogout);
-        btnLogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Log.i(TAG, "onClick Login Button");
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                loginUser(username,password);
-            }
+        if(ParseUser.getCurrentUser() != null){
+            btnLogin.setVisibility(View.INVISIBLE);
+            etUsername.setVisibility(View.INVISIBLE);
+            etPassword.setVisibility(View.INVISIBLE);
+        }
+        btnLogin.setOnClickListener(view12 -> {
+            Log.i(TAG, "onClick Login Button");
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            loginUser(username,password);
         });
-
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logoutUser();
-            }
-        });
+        btnLogout.setOnClickListener(view1 -> logoutUser());
     }
 
     private void loginUser(String username, String password){
         Log.i(TAG, "Attempting to login user" + username);
-        //navigate to the main activity if the user has signed in properly
-
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
@@ -129,14 +119,19 @@ public class ProfileFragment extends Fragment {
                     Log.e(TAG,"Issue with login", e);
                     return;
                 }
+                //navigate to the main activity if the user has signed in properly
                 gotoMainActivity();
-                Toast.makeText(getContext(), "Success", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Logged in successfully", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void logoutUser(){
-        ParseUser.logOutInBackground();
+        if(ParseUser.getCurrentUser() != null){
+            Toast.makeText(getContext(),"Logged out successfully", Toast.LENGTH_SHORT).show();
+            ParseUser.logOutInBackground();
+            gotoLoginActivity();
+        }
     }
 
     private void gotoMainActivity() {
@@ -145,31 +140,10 @@ public class ProfileFragment extends Fragment {
         getActivity().finish();
     }
 
+    private void gotoLoginActivity() {
+        Intent i = new Intent(getContext(),LoginActivity.class);
+        startActivity(i);
+        getActivity().finish();
+    }
 
-
-    /*protected void queryPosts() {
-
-        // Specify which class to query
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.setLimit(20);
-        query.addDescendingOrder(Post.KEY_CREATED_KEY);
-        query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
-        // Specify the object id
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if(e != null){
-                    //Log.e(TAG, " Issue with getting posts",e);
-                    return;
-                }
-                for(Post post: posts){
-                   // Log.i(TAG, "Post:" +  post.getDescription() + "Username: " + post.getUser().getUsername());
-                }
-                allPosts.addAll(posts);
-                postsAdapter.notifyDataSetChanged();
-            }
-        });
-*/
-    //}
 }

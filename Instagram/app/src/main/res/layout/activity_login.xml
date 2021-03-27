@@ -11,6 +11,16 @@
     android:paddingBottom="16dp"
   >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="@id/username"
+        app:layout_constraintEnd_toEndOf="@id/username"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/username"
+        android:src="@drawable/nav_logo_whiteout"/>
+
+
     <EditText
         android:id="@+id/username"
         android:layout_width="0dp"
@@ -58,7 +68,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.2"
+        android:backgroundTint="@android:color/holo_green_light"/>
 
     <ProgressBar
         android:id="@+id/loading"
