@@ -5,8 +5,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.paging.LivePagedListBuilder;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +20,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.instagram.ParseDataSourceFactory;
 import com.example.instagram.Post;
 import com.example.instagram.PostsAdapter;
 import com.example.instagram.R;
@@ -41,7 +49,9 @@ public class PostsFragment extends Fragment {
 
     protected PostsAdapter postsAdapter;
     ArrayList<Post> allPosts;
-    protected   RecyclerView rvPosts;
+    private static RecyclerView rvPosts;
+    private SwipeRefreshLayout swipeContainer;
+    LiveData<PagedList<Post>> posts;
 
 
     // TODO: Rename and change types of parameters
@@ -70,6 +80,7 @@ public class PostsFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,11 +103,57 @@ public class PostsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvPosts = view.findViewById(R.id.rvPosts);
         allPosts = new ArrayList<>();
-        postsAdapter = new PostsAdapter(getContext(),allPosts);
+        postsAdapter = new PostsAdapter(getContext());
         rvPosts.setAdapter(postsAdapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
-        queryPosts();
+
+        //initial page size to fetch can be configured here
+        PagedList.Config pagedListConfig = new PagedList.Config.Builder().setEnablePlaceholders(true)
+                                                                            .setPrefetchDistance(10)
+                                                                            .setInitialLoadSizeHint(10)
+                                                                            .setPageSize(10)
+                                                                            .build();
+
+        ParseDataSourceFactory parseDataSourceFactory = new ParseDataSourceFactory();
+        posts = new LivePagedListBuilder<>(parseDataSourceFactory, pagedListConfig).build();
+        posts.observe(this, new Observer<PagedList<Post>>() {
+            @Override
+            public void onChanged(PagedList<Post> posts) {
+                postsAdapter.submitList(posts);
+            }
+        });
+
+        swipeContainer = view.findViewById(R.id.swipeRefreshLayout);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                posts.observe((LifecycleOwner) getContext(), new Observer<PagedList<Post>>() {
+                    @Override
+                    public void onChanged(PagedList<Post> posts) {
+                       // parseDataSourceFactory.dataSource.invalidate();
+                        postsAdapter.submitList(posts);
+                        swipeContainer.setRefreshing(false);
+                    }
+                });
+            }
+        });
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
+
+    public static void smoothScroll() {
+        if (rvPosts != null) {
+            rvPosts.post(new Runnable() {
+                @Override
+                public void run() {
+                    rvPosts.smoothScrollToPosition(0);
+                }
+            });
+        }
+    }
+
 
     protected void queryPosts() {
 
@@ -108,18 +165,22 @@ public class PostsFragment extends Fragment {
         // Specify the object id
         query.findInBackground(new FindCallback<Post>() {
             @Override
-            public void done(List<Post> posts, ParseException e) {
+            public void done(List<Post> thePosts, ParseException e) {
                 if(e != null){
                     //Log.e(TAG, " Issue with getting posts",e);
                     return;
                 }
-                for(Post post: posts){
+                for(Post post: thePosts){
                     // Log.i(TAG, "Post:" +  post.getDescription() + "Username: " + post.getUser().getUsername());
                 }
-                allPosts.addAll(posts);
+
+                allPosts.clear();
+                allPosts.addAll(thePosts);
                 postsAdapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
         });
-
     }
+
+
 }

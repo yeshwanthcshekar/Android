@@ -32,20 +32,17 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.username);
         etPassword = findViewById(R.id.password);
         btnLogin = findViewById(R.id.login);
-        btnLogin.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Log.i(TAG, "onClick Login Button");
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-                loginUser(username,password);
-            }
+        btnLogin.setOnClickListener(view -> {
+            Log.i(TAG, "onClick Login Button");
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            loginUser(username,password);
         });
     }
 
     private void loginUser(String username, String password){
         Log.i(TAG, "Attempting to login user" + username);
-        //navigate to the main activity if the user has signed in properly
+
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
@@ -53,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.e(TAG,"Issue with login", e);
                     return;
                 }
+                //navigate to the main activity if the user has signed in properly
                 gotoMainActivity();
                 Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_LONG).show();
             }
